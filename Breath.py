@@ -50,7 +50,8 @@ def download_pdf(url, file_name):
 
 def find_noisy_words(path):
         word_counts = dict()
-        for f in os.listdir(path):
+        for f in os.listdir(path): ## for f in drive
+            # f downloadr(path)
             parsed = parser.from_file(path + f)
             c = Counter(parsed["content"].replace('\n',"").split(" "))
             for word in c:
@@ -85,7 +86,7 @@ def find_score(new_pdf_lst, old_pdf_lst): # Return score of old_pdf_lst
 
 
 
-def downloadFile(drive_service, file):
+def downloadFile(drive_service, file, index , all_files_in_drive):
     request = drive_service.files().get_media(fileId=file['id'])
     fh = io.BytesIO()
     downloader = MediaIoBaseDownload(fh, request)
@@ -93,8 +94,9 @@ def downloadFile(drive_service, file):
     while done is False:
         status, done = downloader.next_chunk()
         print("Download %d%%." % int(status.progress() * 100))
-    with open("{}".format(file['name']), "wb") as f:
+    with open("./pdfs/{}".format(file['name']), "wb") as f:
         f.write(fh.getbuffer())
+    all_files_in_drive[index]['path'] = "./{}".format(file['name'])
 
 
 def search_files(drive_service):
@@ -102,45 +104,48 @@ def search_files(drive_service):
     page_token = None
     total_files = []
     while True:
-        query = "mimeType='application/pdf'"
+        query = "mimeType='application/pdf' and trashed=false"
         response = service.files().list(q=query,
                                         spaces='drive',
-                                        fields='nextPageToken, files(id, name)',
+                                        fields='nextPageToken, files(id, name, webViewLink)',
                                         pageToken=page_token).execute()
         for file in response.get('files', []):
-            # Process change
-            print('Found file: %s (%s)' % (file.get('name'), file.get('id')))
             total_files.append(file)
         page_token = response.get('nextPageToken', None)
         if page_token is None:
             break
+    return total_files
 
 
-search_files(driveaccess.access_drive())
 
 if __name__ == "__main__":
+    driveservice = driveaccess.access_drive()
+    all_files_in_drive = search_files(driveservice)
+    for index, file in enumerate(all_files_in_drive):
+        downloadFile(driveservice, file, index, all_files_in_drive)
+
     moodle_json = load_json("moodle_output.json")
     assignments = extract_dates_and_files(moodle_json)
 
     tika.initVM()
     for assignment in assignments:
         new_assignment_path = assignment[PDF_PATH]
-        old_assignments_path = "E:\Hackaton_Demo\google_drive\\" #integrate with Nitzan
+        old_assignments_path = "D:\Studies\Bachelor Degree\\2022-Hackathon\pdfs\\" #integrate with Nitzan
         noisy_words = find_noisy_words(old_assignments_path)
         new_pdf_lst = parse(new_assignment_path, noisy_words)
 
-        paths = []
+        urls = []
         scores = []
-        for f in os.listdir(old_assignments_path):
-            paths.append(old_assignments_path + f)
-            old_pdf_lst = parse(old_assignments_path + f, noisy_words)
+        for f in all_files_in_drive:
+            urls.append(f['webViewLink'])
+            old_pdf_lst = parse(old_assignments_path + f['path'], noisy_words)
             scores.append(find_score(new_pdf_lst, old_pdf_lst))
         avg_score = sum(scores) / len(scores)
-        significant = [(paths[i], scores[i]) for i in range(len(scores)) if scores[i] > 0]
+        significant = [(urls[i], scores[i]) for i in range(len(scores)) if scores[i] > 0]
         significant.sort(key=lambda x: x[1], reverse=True)
 
         assignment["Coverage"] = sum([x[1] for x in significant])*100
-        links = [x[0] for x in significant]
+        links = "".join([x[0] for x in significant])
         assignment["ref_url"] = links
 
 
@@ -162,18 +167,14 @@ if __name__ == "__main__":
         query = 'mutation ($myItemName: String!, $columnVals: JSON!) { create_item (board_id:2663367465, ' \
                 'item_name:$myItemName, column_values:$columnVals) { id } } '
         vars = {
-            'myItemName': toMonday["assignment_name"],
+            'myItemName': 'Computer Architecture - '+toMonday["assignment_name"],
             'columnVals': json.dumps({
                 'status': {'label': 'Working on it'},
                 'date4': {'date': toMonday['due_date']},
-                'text': str(toMonday['ref_url']),
+                'text': toMonday['ref_url'],
                 'numbers': toMonday['coverage']
             })
         }
         data = {'query': query, 'variables': vars}
         r = requests.post(url=apiUrl, json=data, headers=headers)  # make request
         print(r.json())
-
-
-
-
