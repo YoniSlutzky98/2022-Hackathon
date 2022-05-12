@@ -39,7 +39,7 @@ def search_files(drive_service, key_words, course_id):
 
 if __name__ == '__main__':
     file_name = ""
-    service = quickstart.access_drive()
+    service = driveaccess.access_drive()
     res = service.files().list(q=("mimeType='application/pdf'") , spaces="drive", fields="nextPageToken, files(id, name, webViewLink)").execute()
     for file in res.get('files', []):
         print(file)

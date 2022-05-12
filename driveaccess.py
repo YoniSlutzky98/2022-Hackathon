@@ -1,5 +1,4 @@
 from __future__ import print_function
-import io
 
 import os.path
 
@@ -8,7 +7,6 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-import io
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -44,7 +42,3 @@ def access_drive():
     except HttpError as error:
         # TODO(developer) - Handle errors from drive API.
         print(f'An error occurred: {error}')
-
-
-if __name__ == '__main__':
-    main()
