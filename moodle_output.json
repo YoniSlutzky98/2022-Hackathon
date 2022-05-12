@@ -1,0 +1,117 @@
+[
+    {
+        "id": 69,
+        "fullname": "Algorithms",
+        "displayname": "Algorithms",
+        "enrolledusercount": 79,
+        "idnumber": "",
+        "visible": 1,
+        "summary": "",
+        "summaryformat": 1,
+        "format": "singleactivity",
+        "showgrades": true,
+        "lang": "",
+        "enablecompletion": true,
+        "completionhascriteria": false,
+        "completionusertracked": true,
+        "category": 1,
+        "progress": null,
+        "completed": false,
+        "startdate": "12/05/2022",
+        "enddate": "19/05/0222",
+        "marker": 0,
+        "lastaccess": 1652346822,
+        "isfavourite": false,
+        "hidden": false,
+        "files": [
+            {
+                "filename": "ex1.pdf",
+                "filepath": "/",
+                "filesize": 41917,
+                "fileurl": "https://filetransfer.io/data-package/IyaATxCS/download",
+                "timemodified": 1646488682,
+                "mimetype": "image/jpeg"
+            }
+        ],
+        "showactivitydates": true,
+        "showcompletionconditions": true,
+        "timemodified": 1652346177
+    }
+  ,
+    {
+        "id": 69,
+        "fullname": "Algorithms",
+        "displayname": "Algorithms",
+        "enrolledusercount": 79,
+        "idnumber": "",
+        "visible": 1,
+        "summary": "",
+        "summaryformat": 1,
+        "format": "singleactivity",
+        "showgrades": true,
+        "lang": "",
+        "enablecompletion": true,
+        "completionhascriteria": false,
+        "completionusertracked": true,
+        "category": 1,
+        "progress": null,
+        "completed": false,
+        "startdate": "19/05/2022",
+        "enddate": "26/05/0222",
+        "marker": 0,
+        "lastaccess": 1652346822,
+        "isfavourite": false,
+        "hidden": false,
+        "files": [
+            {
+                "filename": "ex2.pdf",
+                "filepath": "/",
+                "filesize": 41917,
+                "fileurl": "https://filetransfer.io/data-package/QjB8YzQp/download",
+                "timemodified": 1646488682,
+                "mimetype": "image/jpeg"
+            }
+        ],
+        "showactivitydates": true,
+        "showcompletionconditions": true,
+        "timemodified": 1652346177
+    },
+  {
+        "id": 69,
+        "fullname": "Algorithms",
+        "displayname": "Algorithms",
+        "enrolledusercount": 79,
+        "idnumber": "",
+        "visible": 1,
+        "summary": "",
+        "summaryformat": 1,
+        "format": "singleactivity",
+        "showgrades": true,
+        "lang": "",
+        "enablecompletion": true,
+        "completionhascriteria": false,
+        "completionusertracked": true,
+        "category": 1,
+        "progress": null,
+        "completed": false,
+        "startdate": "26/05/2022",
+        "enddate": "03/06/0222",
+        "marker": 0,
+        "lastaccess": 1652346822,
+        "isfavourite": false,
+        "hidden": false,
+        "files": [
+            {
+                "filename": "ex3.pdf",
+                "filepath": "/",
+                "filesize": 41917,
+                "fileurl": "https://filetransfer.io/data-package/n0eqBtb3/download",
+                "timemodified": 1646488682,
+                "mimetype": "image/jpeg"
+            }
+        ],
+        "showactivitydates": true,
+        "showcompletionconditions": true,
+        "timemodified": 1652346177
+    }
+]
