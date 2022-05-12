@@ -15,12 +15,12 @@ def downloadFile(drive_service, file):
     with open("{}".format(file['name']), "wb") as f:
         f.write(fh.getbuffer())
 
-def search_files(drive_service, key_words, course_id):
+def search_files(drive_service, key_word):
     service = drive_service
     page_token = None
     total_files = []
     while True:
-        query = "mimeType='application/pdf' and name contains '{0}'".format(key_words)
+        query = "mimeType='application/pdf' and name contains '{0}'".format(key_word)
         response = service.files().list(q=query,
                                           spaces='drive',
                                           fields='nextPageToken, files(id, name)',
@@ -34,15 +34,6 @@ def search_files(drive_service, key_words, course_id):
             break
 
 
-
-
-
-if __name__ == '__main__':
-    file_name = ""
-    service = driveaccess.access_drive()
-    res = service.files().list(q=("mimeType='application/pdf'") , spaces="drive", fields="nextPageToken, files(id, name, webViewLink)").execute()
-    for file in res.get('files', []):
-        print(file)
     
 
         
