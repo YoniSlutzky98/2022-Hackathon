@@ -156,7 +156,7 @@ if __name__ == "__main__":
     apiKey = myToken
     headers = {"Authorization": apiKey}
     boardId = "2663367465"
-
+    
     # Fields to be received from code, placeholders for now
     for assignment in assignments:
         toMonday = {'assignment_name': assignment[ASSIGNMENT_NAME],
