@@ -15,12 +15,12 @@ def downloadFile(drive_service, file):
     with open("{}".format(file['name']), "wb") as f:
         f.write(fh.getbuffer())
 
-def search_files(drive_service, key_word):
+def search_files(drive_service):
     service = drive_service
     page_token = None
     total_files = []
     while True:
-        query = "mimeType='application/pdf' and name contains '{0}'".format(key_word)
+        query = "mimeType='application/pdf'"
         response = service.files().list(q=query,
                                           spaces='drive',
                                           fields='nextPageToken, files(id, name)',
@@ -33,7 +33,7 @@ def search_files(drive_service, key_word):
         if page_token is None:
             break
 
-
+search_files(driveaccess.access_drive())
     
 
         
