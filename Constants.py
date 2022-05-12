@@ -1,0 +1,5 @@
+COURSE = "course"
+ASSIGNMENT_NAME = "assignment_name"
+DUE_DATE = "due_date"
+PDF_PATH = "pdf_path"
+COVERAGE = "Coverage"
