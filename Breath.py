@@ -145,7 +145,7 @@ if __name__ == "__main__":
         significant.sort(key=lambda x: x[1], reverse=True)
 
         assignment["Coverage"] = sum([x[1] for x in significant])*100
-        links = "".join([x[0] for x in significant])
+        links = "'".join([x[0] for x in significant])
         assignment["ref_url"] = links
 
 
